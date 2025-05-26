@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio to AI Video</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        .container { max-width: 600px; margin: auto; }
+        .preview { margin-top: 2em; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Upload Audio to Generate Video</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="audio">Select audio file:</label>
+        <input type="file" id="audio" name="audio" accept="audio/*" required><br><br>
+        <label for="style">Visual style:</label>
+        <select id="style" name="style">
+            <option value="realistic">Realistic</option>
+            <option value="3d">3D</option>
+            <option value="cartoon">Cartoon</option>
+            <option value="abstract">Abstract</option>
+        </select><br><br>
+        <label><input type="checkbox" name="subtitles" value="1"> Add subtitles</label><br><br>
+        <button type="submit">Generate Video</button>
+    </form>
+
+    {% if video_url %}
+    <div class="preview">
+        <h2>Generated Video</h2>
+        <video width="100%" controls>
+            <source src="{{ video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <p><a href="{{ video_url }}" download>Download video</a></p>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
